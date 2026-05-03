@@ -6,7 +6,9 @@ const regd_users = express.Router();
 let users = [];
 
 const isValid = (username)=>{ //returns boolean
-//write code to check is the username is valid
+    let userswithsamename = users.filter((user) => {
+        return user.username === username;
+    });
 }
 
 const authenticatedUser = (username,password)=>{ //returns boolean
