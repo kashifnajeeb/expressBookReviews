@@ -57,10 +57,10 @@ public_users.get('/isbn/:isbn', async function (req, res) {
 // Get book details based on author
 public_users.get('/author/:author', async function (req, res) {
     try {
-        const author = req.params.author;
+        const author = req.params.author.toLowerCase();
         const response = await axios.get(`${baseUrl}/allbooks`);
         const booksObject = Object.values(response.data)
-        const filteredBooks = booksObject.filter(b => b.author === author)
+        const filteredBooks = booksObject.filter(b => b.author.toLowerCase() === author)
 
         if(filteredBooks.length > 0){
             return res.status(200).json(filteredBooks)
@@ -75,10 +75,10 @@ public_users.get('/author/:author', async function (req, res) {
 // Get all books based on title
 public_users.get('/title/:title', async function (req, res) {
   try {
-    const title = req.params.title;
+        const title = req.params.title.toLowerCase();
     const response = await axios.get(`${baseUrl}/allbooks`);
     const booksObject = Object.values(response.data)
-    const filteredBooks = booksObject.filter(b => b.title === title)
+        const filteredBooks = booksObject.filter(b => b.title.toLowerCase() === title)
 
     if(filteredBooks.length > 0){
         return res.status(200).json(filteredBooks)
