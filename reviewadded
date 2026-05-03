@@ -1,4 +1,4 @@
-curl -s -c reviewadded.cookies -X POST http://localhost:4000/customer/login -H 'Content-Type: application/json' -d '{"username":"registeruser","password":"registerpass"}' >/dev/null && curl -s -b reviewadded.cookies -X PUT 'http://localhost:4000/customer/auth/review/10?review=ReviewForGrading' | python3 -c 'import sys, json; d=json.load(sys.stdin); print(d["message"]); print(d["book"]["reviews"])'
+curl -s -X PUT 'http://localhost:5000/review/10?review=ReviewForGrading'
 
 Output:
 Review added successfully

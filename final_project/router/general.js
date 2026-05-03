@@ -23,12 +23,12 @@ public_users.post("/register", (req, res) => {
   return res.status(201).json({ message: "User successfully registered" });
 });
 
-// Internal endpoint used by the async routes below
+// Internal endpoint used by the async routes below so Axios can fetch the book data.
 public_users.get("/allbooks", function (req, res) {
   return res.status(200).json(books);
 });
 
-// Get the book list available in the shop
+// Get the book list available in the shop using async/await with Axios.
 public_users.get("/", async function (req, res) {
   try {
     const response = await axios.get(`${baseUrl}/allbooks`);
@@ -38,7 +38,7 @@ public_users.get("/", async function (req, res) {
   }
 });
 
-// Get book details based on ISBN
+// Get book details based on ISBN using the shared async Axios fetch.
 public_users.get("/isbn/:isbn", async function (req, res) {
   try {
     const isbn = req.params.isbn;
@@ -55,7 +55,7 @@ public_users.get("/isbn/:isbn", async function (req, res) {
   }
 });
 
-// Get book details based on author
+// Get book details based on author using case-insensitive matching.
 public_users.get("/author/:author", async function (req, res) {
   try {
     const author = req.params.author.toLowerCase();
@@ -75,7 +75,7 @@ public_users.get("/author/:author", async function (req, res) {
   }
 });
 
-// Get all books based on title
+// Get all books based on title using case-insensitive matching.
 public_users.get("/title/:title", async function (req, res) {
   try {
     const title = req.params.title.toLowerCase();

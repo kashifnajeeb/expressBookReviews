@@ -1,4 +1,4 @@
-curl -s -b deletereview.cookies -X DELETE http://localhost:4000/customer/auth/review/10 | python3 -c 'import sys, json; print(json.load(sys.stdin)["message"])'
+curl -s -c deletereview.cookies -X POST http://localhost:4000/customer/login -H 'Content-Type: application/json' -d '{"username":"registeruser","password":"registerpass"}' >/dev/null && curl -s -b deletereview.cookies -X PUT 'http://localhost:4000/customer/auth/review/10?review=ToDelete' >/dev/null && curl -s -b deletereview.cookies -X DELETE http://localhost:4000/customer/auth/review/10 | python3 -c 'import sys, json; d=json.load(sys.stdin); print(d["message"]); print(d["book"]["reviews"])'
 
 Output:
 Review deleted successfully
